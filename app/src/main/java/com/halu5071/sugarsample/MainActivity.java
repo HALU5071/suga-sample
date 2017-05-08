@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CREATE_BOOK_CODE && resultCode == RESULT_OK){
             if (data != null){
                 Book book = ((Book) data.getSerializableExtra("book"));
+                book.save();
 //                long id = book.getId();
 //                Log.d(TAG, "Book ID : " + id);
                 mAdapter.add(book);
