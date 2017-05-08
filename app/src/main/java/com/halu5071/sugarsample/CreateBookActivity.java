@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 public class CreateBookActivity extends AppCompatActivity {
 
-    String title;
-    String content;
     int isbn;
 
     Toolbar toolbar;
@@ -42,16 +40,18 @@ public class CreateBookActivity extends AppCompatActivity {
     }
 
     private void save(){
-        if (editTitle.getText() == null){
+        if (editTitle.getText().toString().equals("")){
             Toast.makeText(this, "タイトルは必須", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (editContent.getText() == null){
+        if (editContent.getText().toString().equals("")){
             Toast.makeText(this, "内容は必須", Toast.LENGTH_SHORT).show();
             return;
         }
-        Book book = new Book.Builder(editTitle.getText().toString(), editContent.getText().toString()).addIsbn(isbn).build();
+        Book book = new Book.Builder(editTitle.getText().toString(), editContent.getText().toString())
+                .addIsbn(Integer.parseInt(editIsbn.getText().toString()))
+                .build();
         Intent data = new Intent();
         data.putExtra("book", book);
         setResult(RESULT_OK, data);
