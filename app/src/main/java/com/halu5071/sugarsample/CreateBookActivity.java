@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by HALU on 2017/05/08.
@@ -41,11 +42,16 @@ public class CreateBookActivity extends AppCompatActivity {
     }
 
     private void save(){
-        title = editTitle.getText().toString();
-        content = editContent.getText().toString();
-        isbn = Integer.parseInt(editIsbn.getText().toString());
+        if (editTitle.getText() == null){
+            Toast.makeText(this, "タイトルは必須", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Book book = new Book(isbn, title, content);
+        if (editContent.getText() == null){
+            Toast.makeText(this, "内容は必須", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Book book = new Book.Builder(editTitle.getText().toString(), editContent.getText().toString()).addIsbn(isbn).build();
         Intent data = new Intent();
         data.putExtra("book", book);
         setResult(RESULT_OK, data);

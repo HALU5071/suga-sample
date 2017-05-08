@@ -17,10 +17,10 @@ public class Book extends SugarRecord implements Serializable{
     public Book(){
     }
 
-    public Book(int isbn, String title, String content){
-        this.title = title;
-        this.content = content;
-        this.isbn = isbn;
+    public Book(Builder builder){
+        this.title = builder.title;
+        this.content = builder.content;
+        this.isbn = builder.isbn;
     }
 
     public void setTitle(String title){
@@ -47,19 +47,26 @@ public class Book extends SugarRecord implements Serializable{
         this.content = content;
     }
 
-    /*
+
     public static final class Builder{
 
-        String title = "";
+        String title;
+        String content;
+        int isbn;
 
-        public Builder addTitle(String title){
+        Builder(String title, String content){
             this.title = title;
+            this.content = content;
+        }
+
+        public Builder addIsbn(int isbn){
+            this.isbn = isbn;
             return this;
         }
 
         public Book build(){
-            return
+            return new Book(this);
         }
     }
-    */
+
 }
