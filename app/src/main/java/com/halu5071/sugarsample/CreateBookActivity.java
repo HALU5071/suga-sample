@@ -49,8 +49,10 @@ public class CreateBookActivity extends AppCompatActivity {
             Toast.makeText(this, "内容は必須", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        isbn = Integer.parseInt(editIsbn.getText().toString());
         Book book = new Book.Builder(editTitle.getText().toString(), editContent.getText().toString())
-                .addIsbn(Integer.parseInt(editIsbn.getText().toString()))
+                .addIsbn(isbn)
                 .build();
         Intent data = new Intent();
         data.putExtra("book", book);
